@@ -38,7 +38,7 @@ public class EnemyBehaviour : MonoBehaviour
             damagePlayer = collider.gameObject.GetComponent<PlayerBehaviour>().RemovePlayerHealth(damage, secondToDamagePlayer);
             StartCoroutine(damagePlayer);
 
-            // desactive slender object if this bool is on
+            // deactivate slender object if this bool is on
             if (enableDisappear)
                 StartCoroutine(Disappear(timeToDisappear));                   
         }

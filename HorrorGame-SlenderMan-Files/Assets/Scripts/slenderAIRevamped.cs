@@ -147,7 +147,7 @@ public class slenderAIRevamped : MonoBehaviour
                     randNum2 = Random.Range(0, 2); //randNum2 will equal to a random range of numbers between 0 and 2
                     if (randNum2 == 0) //If randNum2 equals to 0,
                     {
-                        //jumpscareSound.Play(); //The jumpscare sound will play
+                        jumpscareSound.Play(); //The jumpscare sound will play
                     }
                     token4 = 1; //token4 = 1, which means this function won't occur again until token4 = 0
                 }
@@ -168,6 +168,8 @@ public class slenderAIRevamped : MonoBehaviour
         //If Slender is out of the player's camera's FOV and the player's health is over 0 OR if the raycast isn't hitting the player and the player's health is over 0,
         if (!GeometryUtility.TestPlanesAABB(planes, slenderMesh.bounds) && playerHealth > 0 || raycastScript.detected == false && playerHealth > 0)
         {
+            Debug.Log("Can't see slenderman");
+
             ai.speed = m_speed; //Slender's speed will equal to the value of m_speed
             ai.enabled = true; //Slender's Nav Mesh Agent component will be enabled
             if (token3 == 0) //If token3 equals to 0,
@@ -221,8 +223,10 @@ public class slenderAIRevamped : MonoBehaviour
             {
                 staticAmount = 0.9f; //staticAmount equals to 0.9
             }
-            player.gameObject.SetActive(false); //The player object will be disabled
             jumpscareCam.SetActive(true); //Slender's jumpscare camera will be enabled
+            jumpscareCam.GetComponent<Camera>().enabled = true;
+            player.gameObject.SetActive(false); //The player object will be disabled
+         
             ai.speed = 0; //Slender's speed will equal to 0
             ai.SetDestination(transform.position); //Sets the AI's destination to itself.
         }
